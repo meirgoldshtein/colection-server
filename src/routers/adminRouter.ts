@@ -1,2 +1,7 @@
 import { Router } from "express";
-export const adminRouter = Router();
+
+
+const router = Router();
+
+
+export default router;

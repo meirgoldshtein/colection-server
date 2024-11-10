@@ -1,3 +1,6 @@
 import e, { Router } from "express";
 
-export const votesRouter = Router();
+const router = Router();
+
+
+export default router;

@@ -3,7 +3,7 @@ import { Document, model, ObjectId, Schema, Types } from "mongoose";
 export interface ICandidate extends Document {
     name: string,
     image: string,
-    votes: number,
+    votes: number | null,
 }
 
 const candidateSchema = new Schema<ICandidate>( {
@@ -20,5 +20,6 @@ const candidateSchema = new Schema<ICandidate>( {
     image: { type: String, required: true },
     votes: { type: Number, default: null }
 })
+candidateSchema.index({ name: 1 }, { unique: true });
 
 export default model<ICandidate>("Candidate", candidateSchema);
