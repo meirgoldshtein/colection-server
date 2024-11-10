@@ -1,3 +1,7 @@
 import { Router } from "express";
+import { seed } from "../controllers/candidatesController";
 
-export const candidatesRouter = Router();
+const router = Router();
+router.post("/seed", seed);
+
+export default router;

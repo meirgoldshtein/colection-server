@@ -1,15 +1,17 @@
 console.log('server start running');
 import express from 'express';
 import 'dotenv/config';
-import { usersRouter } from './routers/usersRouter';
-import { adminRouter } from './routers/adminRouter';
-import { votesRouter } from './routers/votesRouter';
-import { candidatesRouter } from './routers/candidatesRouter';
+import usersRouter from './routers/usersRouter';
+import  adminRouter from './routers/adminRouter';
+import  votesRouter from './routers/votesRouter';
+import  candidatesRouter from './routers/candidatesRouter';
+import { connectDB } from './config/db';
 
 const PORT = process.env.PORT || 3000;
 
 
 const app = express();
+connectDB();
 app.use(express.json());
 
 app.use('/api/users', usersRouter);
