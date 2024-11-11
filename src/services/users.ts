@@ -77,7 +77,7 @@ export const userVoteService = async (user_id: string, candidate_id: string) => 
         // delete previous vote from candidate collection
         const previousVote = await user.findOne({ _id: user_id }).lean()
         if (previousVote?.votedFor) {
-            const candidateToInc = await candidate.findOneAndUpdate({ _id: previousVote.votedFor }, { $inc: { votes: -1 } });
+            await candidate.findOneAndUpdate({ _id: previousVote.votedFor }, { $inc: { votes: -1 } });
         };
         const userToUpdate = await user.findOneAndUpdate({ _id: user_id }, { $set: { hasVoted: true, votedFor: candidate_id } });
         if (!userToUpdate) {

@@ -1,5 +1,5 @@
 import candidate from "../models/candidate";
-
+import user from "../models/user";
 export const initDatabase = async () => {
     try {
         const cands = [{
@@ -34,8 +34,17 @@ export const getCandidatesService = async () => {
     }
 }
 
-export const voteForCandidateService = async (id: string) => {
+export const voteForCandidateService = async (user_id: string, id: string) => {
     try {
+        const userExists = await user.findOne({ _id: user_id })
+        if (!userExists) {
+            throw new Error("User not found");
+        }
+
+        if (userExists.hasVoted && userExists.votedFor == (id as any)) {
+            throw new Error("User has already voted to this candidate");
+        }
+
         const candidateToVote = await candidate.findOneAndUpdate({ _id: id }, { $inc: { votes: 1 } });
         if (!candidateToVote) {
             throw new Error("Candidate not found");
