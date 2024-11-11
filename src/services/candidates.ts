@@ -12,11 +12,10 @@ export const initDatabase = async () => {
             votes: 0
         }
         ]
-        const indexes = await candidate.collection.getIndexes();
-        console.log('All indexes:', JSON.stringify(indexes, null, 2));
         for (let i = 0; i < cands.length; i++) {
             const newCandidate = new candidate(cands[i]);
             await newCandidate.save();
+            console.log(newCandidate)
         }
 
     } catch (error) {
@@ -31,6 +30,19 @@ export const getCandidatesService = async () => {
         return candidates;
     } catch (error) {
         console.log("Error accured while getting candidates: ", error);
+        throw error
+    }
+}
+
+export const voteForCandidateService = async (id: string) => {
+    try {
+        const candidateToVote = await candidate.findOneAndUpdate({ _id: id }, { $inc: { votes: 1 } });
+        if (!candidateToVote) {
+            throw new Error("Candidate not found");
+        }
+        return candidate;
+    } catch (error) {
+        console.log("Error accured while voting for candidate: ", error);
         throw error
     }
 }

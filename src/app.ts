@@ -6,11 +6,13 @@ import  adminRouter from './routers/adminRouter';
 import  votesRouter from './routers/votesRouter';
 import  candidatesRouter from './routers/candidatesRouter';
 import { connectDB } from './config/db';
+import cors from 'cors';
 
 const PORT = process.env.PORT || 3000;
 
 
 const app = express();
+app.use(cors( ));
 connectDB();
 app.use(express.json());
 
