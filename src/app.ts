@@ -1,5 +1,5 @@
 console.log('server start running');
-import express from 'express';
+import express, { Request, Response} from 'express';
 import 'dotenv/config';
 import usersRouter from './routers/usersRouter';
 import adminRouter from './routers/adminRouter';
@@ -13,13 +13,16 @@ import { Server } from 'socket.io';
 const PORT = process.env.PORT || 3000;
 
 
-const app = express();
+export const app = express();
 const server = http.createServer(app);
 
 
 app.use(cors());
 connectDB();
 app.use(express.json());
+
+app.get('/ping', (req: Request, res: Response) => {
+    res.status(200).send('pong')});
 
 app.use('/api/users', usersRouter);
 app.use('/api/admin', adminRouter);
