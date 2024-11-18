@@ -9,7 +9,6 @@ export const registerUser = async (userGet: newUserDto) => {
     try {
         const { username, password } = userGet
         if (!username || !password) {
-            console.log(username, password);
             throw new CustomError(
                 "Username and password are required",
                 400
@@ -29,7 +28,6 @@ export const registerUser = async (userGet: newUserDto) => {
         await newUser.save()
         return { success: true, data: { ...newUser, password: '********' }, message: "User created successfully", status: 201 }
     } catch (error) {
-        console.log(error);
         throw error
     }
 }
@@ -87,3 +85,4 @@ export const userVoteService = async (user_id: string, candidate_id: string) => 
     } catch (error) {
     }
 }
+

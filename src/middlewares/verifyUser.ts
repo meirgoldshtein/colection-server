@@ -11,6 +11,7 @@ export default (req: Request, res : Response, next :NextFunction) => {
         (req as any).user = decodedToken;
         next();
     } catch (error) {
+        console.log(error)
          res.status(401).json(error as JsonWebTokenError);
     }
 }

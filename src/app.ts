@@ -1,6 +1,5 @@
-console.log('server start running');
+
 import express, { Request, Response} from 'express';
-import 'dotenv/config';
 import usersRouter from './routers/usersRouter';
 import adminRouter from './routers/adminRouter';
 import votesRouter from './routers/votesRouter';
@@ -9,18 +8,22 @@ import { connectDB } from './config/db';
 import cors from 'cors';
 import http from 'http';
 import { Server } from 'socket.io';
+import * as dotenv from 'dotenv';
+dotenv.config({
+    path:  process.env.NODE_ENV === 'production' 
+    ? '.env'
+    : '.env.staging',
+    override: true
+});
 
-const PORT = process.env.PORT || 3000;
-
+const PORT = process.env.PORT
 
 export const app = express();
-const server = http.createServer(app);
-
+export const server = http.createServer(app);
 
 app.use(cors());
 connectDB();
 app.use(express.json());
-
 app.get('/ping', (req: Request, res: Response) => {
     res.status(200).send('pong')});
 
@@ -28,7 +31,6 @@ app.use('/api/users', usersRouter);
 app.use('/api/admin', adminRouter);
 app.use('/api/votes', votesRouter);
 app.use('/api/candidates', candidatesRouter);
-
 
 export const io = new Server(server,{ cors: { origin: "*" } });
 io.on('connection', (socket) => {

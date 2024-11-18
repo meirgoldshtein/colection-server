@@ -5,8 +5,9 @@
   "author": "",
   "license": "ISC",
   "scripts": {
-    "test": "jest dist",
-    "dev": "nodemon dist/app.js"
+    "test": "cross-env NODE_ENV=staging jest --detectOpenHandles dist",
+    "dev:prd": "cross-env NODE_ENV=production nodemon dist/app.js",
+    "dev:stg": "cross-env NODE_ENV=staging nodemon dist/app.js"
   },
   "description": "",
   "dependencies": {
@@ -15,6 +16,8 @@
     "bcrypt": "^5.1.1",
     "cookie-parser": "^1.4.6",
     "cors": "^2.8.5",
+    "cross": "^1.0.0",
+    "cross-env": "^7.0.3",
     "dotenv": "^16.4.5",
     "express": "^4.21.1",
     "jsonwebtoken": "^9.0.2",
