@@ -33,7 +33,7 @@
     "supertest": "^7.0.0",
     "ts-jest": "^29.2.5",
     "ts-node": "^10.9.2",
- "node": "^22.11.0"
+ "node": "^22.10.0"
   },
   "devDependencies": {
     "@types/socket.io": "^3.0.1",
@@ -46,7 +46,7 @@
     "@types/jest": "^29.5.14",
     "@types/jsonwebtoken": "^9.0.7",
     "@types/mongoose": "^5.11.96",
-    "@types/node": "^22.11.0",
+    "@types/node": "^22.10.0",
     "@types/swagger-jsdoc": "^6.0.4",
     "@types/swagger-ui-express": "^4.1.6",
     "@types/validator": "^13.12.2",
